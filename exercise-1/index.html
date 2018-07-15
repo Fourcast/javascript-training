@@ -14,10 +14,10 @@
         // Initialize the client with API key and People API, and initialize OAuth with an
         // OAuth 2.0 client ID and scopes (space delimited string) to request access.
         gapi.client.init({
-            apiKey: 'AIzaSyB8Bkk8EYD15bccinMog3mZ26gYy6YsaS0',
-            discoveryDocs: ["https://people.googleapis.com/$discovery/rest?version=v1","https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
-            clientId: '859667609645-13vvsjhdgdfajfepgg3sdg814mg9efgn.apps.googleusercontent.com',
-            scope: 'profile https://www.googleapis.com/auth/calendar'
+            apiKey: 'API_KEY_HERE',
+            discoveryDocs: ["https://people.googleapis.com/$discovery/rest?version=v1"],
+            clientId: 'CLIENT_ID.apps.googleusercontent.com',
+            scope: 'SCOPE_HERE'
         }).then(function () {
           // Listen for sign-in state changes.
           gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
@@ -41,31 +41,18 @@
 
       function whoAmI() {
         // Make an API call to the People API, and print the user's given name.
-        gapi.client.people.people.get({
-          'resourceName': 'people/me',
-          'requestMask.includeField': 'person.names'
-        }).then(function(response) {
-          console.log('Hello, ' + response.result.names[0].givenName);
+        //make call to gapi.client.people to get current user's name.
+        gapi.client.CALL_API_HERE_({API_PARAMETERS}).then(function(response) {
+          //print name
         }, function(reason) {
-          console.log('Error: ' + reason.result.error.message);
+          //print error
         });
       }
 
       function myNextEvents() {
-        gapi.client.calendar.calendarList.list({'calendarId':'primary'}).then(function(response){console.log(response);});
       }
 
       function createEvent(){
-        gapi.client.calendar.events.insert({"calendarId":"primary",
-         "end": {
-          "dateTime": "2018-07-31T12:00:00.000Z"
-         },
-         "start": {
-          "dateTime": "2018-07-31T10:50:00.000Z"
-         },
-         "summary": "Calendar Event",
-         "description": "much events here"
-        }).then(function(response){console.log(response);});
       }
     </script>
     <script async defer src="https://apis.google.com/js/api.js"
