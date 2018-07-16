@@ -43,19 +43,20 @@ function runPsyduck(e) {
  */
 function extractSenderData(messageId) {
   // Use the Gmail service to access information about this message.
-  var mail = GmailApp.getMessageById(messageId);
-  var threadId = mail.getThread().getId();
+  
+  var mail = //TODO get the Email from the Gmail Service
+  var threadId = //TODO get thread id for email
   var senderEmail = extractEmailAddress(mail.getFrom());
 
-  var recentThreads = GmailApp.search('from:' + senderEmail);
+  var recentThreads = //TODO search Gmail threads with this sender
   var recents = [];
 
   // Retrieve information about up to 5 recent threads from the same sender.
   recentThreads.slice(0,MAX_THREADS).forEach(function(thread) {
     if (thread.getId() != threadId && ! thread.isInChats()) {
       recents.push({
-        'subject': thread.getFirstMessageSubject(),
-        'count': thread.getMessageCount(),
+        'subject': //TODO get subject,
+        'count': //TODO get count,
         'link': 'https://mail.google.com/mail/u/0/#inbox/' + thread.getId(),
         'lastDate': thread.getLastMessageDate().toDateString()
       });
